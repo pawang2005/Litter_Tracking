@@ -46,7 +46,7 @@ router.post('/create', upload.single('profilePicture'),async (req, res) => {
 })
 
 router.post('/update', upload.single('profilePicture'), async (req, res) => {
-    const { firstname, lastname, email, date } = req.body;
+    const { firstname, lastname, email, date, Area } = req.body;
     const collectorId = req.body.collectorId
     try {
         if (!req.file) {
@@ -55,9 +55,9 @@ router.post('/update', upload.single('profilePicture'), async (req, res) => {
                 lastname: lastname,
                 email: email,
                 date: date,
+                Area: Area
             }, { new: true });
             req.user = updatedCollector;
-            console.log(updatedCollector)
             return res.redirect('/admin/collector');
         }
         else {
@@ -66,7 +66,8 @@ router.post('/update', upload.single('profilePicture'), async (req, res) => {
                 firstname,
                 lastname,
                 email,
-                date
+                date,
+                Area
             }, { new: true });
             req.user = updatedCollector;
             return res.redirect('/admin/collector');
