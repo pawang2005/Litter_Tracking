@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanCity Tasks</title>
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Assigned To</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% task.forEach(tasks=> { %>
+                    <tr>
+                        <td>
+                            <%= tasks.assignee %>
+                        </td>
+                        <td>
+                            <%= tasks.status %>
+                        </td>
+                        <td>
+                            <%= tasks.date %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

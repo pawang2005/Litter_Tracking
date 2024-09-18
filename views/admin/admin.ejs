@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="container">
+        <% if (locals.user) { %>
+            <% collectors.forEach(collector => { %>
+                <div class="collector-card">
+                    <span class="collector-name">Name: <%= collector.firstname %> <%= collector.lastname %></span>
+                    <br>
+                    <span  class="collector-name">Area: <%= collector.Area %></span>
+                    <a href="/admin/assign/<%= collector._id %>" class="assign-btn">
+                        Assign a Task
+                    </a>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+</body>
+</html>

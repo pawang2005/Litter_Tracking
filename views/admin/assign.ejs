@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Tasks</title>
+</head>
+<body>
+    <div class="navbar">
+        <%- include('./partials/nav.ejs') %>
+    </div>
+
+    <div>
+        <h1>Complains</h1>
+        <table style="border: 1px solid black;">
+            <tr>
+                <th>Id</th>
+                <th>Complain</th>
+                <th>Location</th>
+                <th>Complain Date</th>
+                <th>Category</th>
+                <th>Weight</th>
+                <th>Assign</th>
+            </tr>
+            <% for (var i = 0; i < locals.complain.length; i++) { %>
+                <% if (locals.complain[i].status === "pending") { %>
+                    <tr>
+                        <td><%= locals.complain[i]._id %></td>
+                        <td><%= locals.complain[i].complain %></td>
+                        <td>Latitude: <%= locals.complain[i].location[0].latitude %>, Longitude: <%= locals.complain[i].location[0].longitude %></td>
+                        <td><%= locals.complain[i].createdAt %></td>
+                        <td><%= locals.complain[i].category %></td>
+                        <td><%= locals.complain[i].weight %></td>
+                        <td>
+                            <form action="/admin/assign" method="post">
+                                <input type="hidden" name="complainId" value="<%= locals.complain[i]._id %>">
+                                <input type="hidden" name="collectorId" value="<%= locals.collectorId %>">
+                                <button type="submit" id="btn">Assign</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>
+            <% } %>
+        </table>
+    </div>
+</body>
+</html>

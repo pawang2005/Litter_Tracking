@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cleaning Drives</title>
+    <link rel="stylesheet" href="/user.css">
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <main>
+        <section id="drives-section">
+            <h2>My Cleaning Drives</h2>
+            <div class="drives-container">
+                <% if (drives && drives.length > 0) { %>
+                    <% drives.forEach(drive => { %>
+                        <div class="drive-card">
+                            <h3><%= drive.location %></h3>
+                            <p>Date: <%= new Date(drive.date).toLocaleDateString() %></p>
+                            <p>Participants Required: <%= drive.number %></p>
+                            <p>Applied Participants: <%= drive.Applied %></p>
+                            <% const hasApplied = drive.appliedUsers.includes(user._id); %>
+                            <% const isFull = drive.Applied >= drive.number; %>
+                            <% if (hasApplied) { %>
+                                <p class="applied-status">Already Applied</p>
+                            <% } else if (isFull) { %>
+                                <p class="full-status">Drive Full</p>
+                            <% } else { %>
+                                <form action="/apply" method="post">
+                                    <input type="hidden" name="driveId" value="<%= drive._id %>">
+                                    <button type="submit">Apply</button>
+                                </form>
+                            <% } %>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No cleaning drives found.</p>
+                <% } %>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

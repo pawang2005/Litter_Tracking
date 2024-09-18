@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drives</title>
+</head>
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  .delete-btn:hover {
+    background-color: #cc0000;
+  }
+</style>
+<body>
+  <%- include('./partials/nav.ejs') %>
+
+  <div class="container">
+    <div class="form-container">
+      <form action="/admin/drives" method="post">
+        <label for="location">Location:</label>
+        <input type="text" name="location" id="location">
+        <label for="date">Date:</label>
+        <input type="date" name="date" id="date">
+        <label for="number">Number:</label>
+        <input type="number" name="number" id="number">
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <div class="container">
+      <div class="drives-list">
+        <% drives.forEach(drive => { %>
+          <div class="drive-item">
+            <h3><%= drive.location %></h3>
+            <p>Date: <%= new Date(drive.date).toLocaleDateString() %></p>
+            <p>Number of Volunteers Required: <%= drive.number %></p>
+            <p>Applied Participants: <%= drive.appliedUsers.length %></p>
+            <button onclick="viewParticipants('<%= drive._id %>')">View Participants</button>
+            <% if (locals.user && locals.user.role === 'admin') { %>
+              <form action="/admin/drives/delete/<%= drive._id %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this drive?');">
+                <button type="submit" class="delete-btn">Delete Drive</button>
+              </form>
+            <% } %>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  
+    <div id="participantModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Participants</h2>
+        <div id="participantList"></div>
+      </div>
+    </div>
+  
+    <script>
+      const modal = document.getElementById('participantModal');
+      const span = document.getElementsByClassName('close')[0];
+      const participantList = document.getElementById('participantList');
+  
+      span.onclick = function() {
+        modal.style.display = 'none';
+      }
+  
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = 'none';
+        }
+      }
+  
+      async function viewParticipants(driveId) {
+        try {
+          const response = await fetch(`/admin/drives/${driveId}/participants`);
+          const participants = await response.json();
+          participantList.innerHTML = participants.map(p => `
+            <p>${p.firstname} ${p.lastname} - ${p.email}</p>
+          `).join('');
+          modal.style.display = 'block';
+        } catch (error) {
+          console.error('Error fetching participants:', error);
+          alert('An error occurred while fetching participants');
+        }
+      }
+    </script>
+</body>
+
+</html>

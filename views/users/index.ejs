@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanCity</title>
+    <link rel="stylesheet" href="/user.css">
+</head>
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <main>
+        <% if (!locals.user) { %>
+            <section id="home">
+                <h2>Welcome to CleanCity</h2>
+                <p>Help keep your city clean by reporting litter and participating in community cleaning drives.</p>
+            </section>
+        <% } else { %>
+            <section id="complaints">
+                <div class="card-container">
+                    <% reversedData.slice(0, 9).forEach((item)=> { %>
+                        <div class="card">
+                            <div class="card-header">
+                                <img src="<%= item.userInfo.profilePicture || '/images/default.png' %>" alt="Profile Picture">
+                                <span class="user-name">
+                                    <%= item.userInfo.firstname %> <%= item.userInfo.lastname %>
+                                </span>
+                            </div>
+                            <div class="card-image">
+                                <img src="<%= item.complaint.imageURL %>" alt="Reported litter">
+                            </div>
+                            <div class="card-content">
+                                <p><%= item.complaint.complain %></p>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </section>
+        <% } %>
+    </main>   
+</body>
+</html>

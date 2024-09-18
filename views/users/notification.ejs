@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications</title>
+  <link rel="stylesheet" href="/user.css">
+</head>
+
+<body>
+  <%- include('./partials/nav.ejs') %>
+
+  <div class="notifications-container">
+    <h2>Your Complaints Status</h2>
+    <% if (complaints && complaints.length> 0) { %>
+      <% complaints.forEach(complaint=> { %>
+        <div class="notification-item" data-id="<%= complaint._id %>">
+          <% if (!complaint.isRead) { %>
+            <span class="unread-dot"></span>
+            <% } %>
+              <h3>Complaint ID: <%= complaint._id %>
+              </h3>
+              <p class="status">Status: <%= complaint.status %>
+              </p>
+              <p>Created At: <%= complaint.createdAt.toLocaleDateString() %>
+              </p>
+        </div>
+        <% }) %>
+          <% } else { %>
+            <p class="no-complaints">You have no complaints at the moment.</p>
+            <% } %>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const notificationItems = document.querySelectorAll('.notification-item');
+
+      notificationItems.forEach(item => {
+        item.addEventListener('click', function () {
+          const complaintId = this.getAttribute('data-id');
+          const unreadDot = this.querySelector('.unread-dot');
+
+          if (unreadDot) {
+            fetch('/notifications/markAsRead', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ complaintId }),
+            })
+              .then(response => {
+                if (response.ok) {
+                  unreadDot.remove();
+                }
+              })
+              .catch(error => console.error('Error:', error));
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

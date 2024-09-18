@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #198754; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-size: cover;
+        }
+
+        .signin-box {
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .signin-box img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        .signin-box h2 {
+            font-size: 22px;
+            margin-top: 10px;
+            color: white;
+        }
+
+        .signin-box p {
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .signin-box input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            font-size: 16px;
+            border: none;
+            border-bottom: 2px solid #ccc;
+            background: transparent;
+            color: white;
+            outline: none;
+        }
+
+        .signin-box input::placeholder {
+            color: white;
+        }
+
+        .signin-box button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4f2aad;
+            color: white;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .signin-box button:hover {
+            background-color: #3c217f;
+        }
+
+        .signin-box select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            font-size: 16px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        .profile-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-icon img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+
+        .profile-icon h3 {
+            color: white;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signin-box">
+        <div class="profile-icon">
+            <img src="/images/login.png" alt="Profile Icon">
+        </div>
+        <h3>Admin</h3>
+        <form action="/signin" method="post">
+            <input type="email" placeholder="Email" required name="email">
+            <input type="password" placeholder="Password" required name="password">
+            <select name="role" id="role">
+                <option value="admin">Admin</option>
+                <option value="user">User</option>  
+                <option value="collector">Collector</option>
+            </select>
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+
+</body>
+</html>

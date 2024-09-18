@@ -1,0 +1,533 @@
+/* styling for users capture ejs*/
+
+h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+div.inline {
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px;
+}
+#video, #canvas {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+    height: 240px;
+}
+#capture {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#capture:hover {
+    background-color: #45a049;
+}
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+input[type="text"] {
+    width: calc(100% - 40px);
+    max-width: 300px;
+    height: 100px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    max-width: 80px;
+    padding: 10px;
+    background-color: #45a049;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+/* styling for users drives ejs*/
+
+main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+#drives-section {
+    margin-top: 30px;
+}
+
+#drives-section h2 {
+    color: #2aa4b7;
+    margin-bottom: 20px;
+}
+
+.drive-container {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.drive-container:nth-child(odd) {
+    background-color: #8eefbc;
+}
+
+.drive-container:nth-child(even) {
+    background-color: #a7c8db;
+}
+
+.drive-container h3 {
+    color: #00796b;
+    margin-top: 0;
+}
+
+.drive-details {
+    color: #333;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.drive-details strong {
+    color: #333;
+}
+
+/* styling for users index ejs*/
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Card container - flex layout for responsive design */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* Styling for individual cards */
+.card {
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    overflow: hidden;
+    width: calc(33.333% - 1rem);
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect: subtle zoom and shadow */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsiveness: adjust card size for tablets */
+@media (max-width: 768px) {
+    .card {
+        width: calc(50% - 1rem);
+    }
+}
+
+/* Responsiveness: adjust card size for mobile phones */
+@media (max-width: 480px) {
+    .card {
+        width: 100%;
+    }
+}
+
+/* Card header styling: user information */
+.card-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+/* Profile picture style */
+.card-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+    border: 2px solid #007bff;
+    padding: 2px;
+}
+
+/* Username styling */
+.user-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Card image: full width and responsive */
+.card-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+/* Image hover effect */
+.card-image img:hover {
+    opacity: 0.85;
+}
+
+/* Card content: text styling */
+.card-content {
+    padding: 1rem;
+    color: #333;
+}
+
+.card-content p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Adjust spacing between text for smaller screens */
+@media (max-width: 480px) {
+    .card-content p {
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+}
+
+
+
+/* styling for users notification ejs*/
+
+.notifications-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Scoped styles for notifications */
+.notifications-container .notification-item {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+/* Hover effect on notification item */
+.notifications-container .notification-item:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Scoped styles for the section title */
+.notifications-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+/* Unread dot indicator */
+.notifications-container .unread-dot {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 12px;
+    height: 12px;
+    background-color: #ff4500;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(255, 69, 0, 0.7);
+}
+
+/* Scoped styles for notification item title */
+.notifications-container h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Scoped styles for text inside the notification */
+.notifications-container p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Status-specific styling */
+.notifications-container p.status {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Message when no complaints exist */
+.notifications-container p.no-complaints {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+}
+
+/* Media query for responsive adjustments */
+@media (max-width: 480px) {
+    .notifications-container {
+        padding: 1rem;
+    }
+
+    .notifications-container .notification-item {
+        padding: 1rem;
+    }
+
+    .notifications-container h2 {
+        font-size: 1.6rem;
+    }
+
+    .notifications-container h3 {
+        font-size: 1.1rem;
+    }
+
+    .notifications-container p {
+        font-size: 0.95rem;
+    }
+}
+
+
+
+/* styling for users profile ejs*/
+
+.profile-container {
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.profile-picture {
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+.profile-picture img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #333;
+}
+
+.edit-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+}
+
+.edit-button i {
+    color: #007bff;
+}
+
+.edit-button i:hover {
+    color: #0056b3;
+}
+
+
+.details-section {
+    margin-bottom: 20px;
+}
+
+.details-section h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.details-section p {
+    color: #555;
+}
+
+.posts-section {
+    margin-top: 20px;
+}
+
+.posts-section h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.post {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.post h3 {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.post img {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.post p {
+    color: #555;
+}
+
+
+
+/* styling for users update ejs*/
+
+.profile-update-container {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding: 0;
+    margin: 0;
+  }
+
+  .profile-update-container main {
+    max-width: 600px;
+    margin: 3rem auto;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-update-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+
+  .profile-update-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .profile-update-container label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .profile-update-container input[type="text"],
+  .profile-update-container input[type="email"],
+  .profile-update-container input[type="date"],
+  .profile-update-container input[type="file"] {
+    padding: 0.75rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+
+  .profile-update-container input[type="text"]:focus,
+  .profile-update-container input[type="email"]:focus,
+  .profile-update-container input[type="date"]:focus,
+  .profile-update-container input[type="file"]:focus {
+    border-color: #4caf50;
+    outline: none;
+  }
+
+  .profile-update-container button {
+    padding: 0.75rem 2rem;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .profile-update-container button:hover {
+    background-color: #45a049;
+  }
+
+  @media (max-width: 768px) {
+    .profile-update-container main {
+      padding: 1.5rem;
+    }
+
+    .profile-update-container button {
+      padding: 0.75rem;
+    }
+  }
+
+  /* File Input Style */
+  .profile-update-container input[type="file"] {
+    padding: 0;
+  }
+
+  .profile-update-container input[type="file"]::file-selector-button {
+    padding: 0.5rem 1rem;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .profile-update-container input[type="file"]::file-selector-button:hover {
+    background-color: #45a049;
+  }

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collector Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .collector-analytics {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+        }
+        .charts-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .chart-wrapper {
+            width: 48%;
+            height: 300px;  /* Set a fixed height */
+        }
+        canvas {
+            max-width: 100%;
+            height: 100% !important;  /* Ensure the canvas takes full height of wrapper */
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <h1>Collector Analytics</h1>
+
+    <% if (analytics && analytics.length > 0) { %>
+        <% analytics.slice(0, 10).forEach(function(analytic) { %>
+            <div class="collector-analytics">
+                <h2>Collector: <%= analytic.name || 'Unknown' %></h2>
+                <p>Total Tasks Completed: <%= analytic.taskCompleted || 0 %></p>
+                <p>Average Time to Complete: <%= ((analytic.avgTimeToComplete || 0) / (1000 * 60)).toFixed(2) %> minutes</p>
+
+                <div class="charts-container">
+                    <div class="chart-wrapper">
+                        <h3>Category Breakdown</h3>
+                        <canvas id="categoryChart-<%= analytic.collectorId %>"></canvas>
+                    </div>
+                    <div class="chart-wrapper">
+                        <h3>Weight Breakdown</h3>
+                        <canvas id="weightChart-<%= analytic.collectorId %>"></canvas>
+                    </div>
+                </div>
+
+                <script>
+                    (function() {
+                        var categoryData = <%- JSON.stringify(analytic.categoryBreakdown || {}) %>;
+                        var weightData = <%- JSON.stringify(analytic.weightBreakdown || {}) %>;
+
+                        // Category Chart
+                        new Chart(document.getElementById('categoryChart-<%= analytic.collectorId %>'), {
+                            type: 'pie',
+                            data: {
+                                labels: Object.keys(categoryData),
+                                datasets: [{
+                                    data: Object.values(categoryData),
+                                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false
+                            }
+                        });
+
+                        // Weight Chart
+                        new Chart(document.getElementById('weightChart-<%= analytic.collectorId %>'), {
+                            type: 'pie',
+                            data: {
+                                labels: Object.keys(weightData),
+                                datasets: [{
+                                    data: Object.values(weightData),
+                                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false
+                            }
+                        });
+                    })();
+                </script>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>No analytics data available.</p>
+    <% } %>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collector List</title>
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <div class="container">
+        <% if (locals.user) { %>
+            <% collectors.forEach(collector => { %>
+                <div class="user-card">
+                    <div class="user-info">
+                        <span class="user-name"><%= collector.firstname %> <%= collector.lastname %></span>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-email">Email: <%= collector.email %></span>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-role">Role: <%= collector.role %></span>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-area">Area: <%= collector.Area %></span>rea
+                    </div>
+                    <div>
+                        <form action="/admin/analytic/<%= collector._id %>" method="get">
+                            <button>Analytic</button>
+                        </form>
+                    </div>
+                    <form action="/admin/delete/<%= collector._id %>" method="post" onsubmit="return confirm('Are you sure you want to delete this collector?');">
+                        <button>Delete</button>
+                    </form>
+                    <form action="/admin/update/<%= collector._id %>" method="get">
+                        <button>Update</button>
+                    </form>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+</body>
+</html>

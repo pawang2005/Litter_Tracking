@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanCity - Update Status</title>
+    <style>
+        h2 {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 2rem;
+            color: #444;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            transition: border 0.3s ease;
+        }
+
+        select:focus {
+            border-color: #1abc9c;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background-color: #1abc9c;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #16a085;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            form {
+                padding: 1.5rem;
+            }
+
+            button {
+                padding: 0.75rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <h2>Update Task Status</h2>
+    <form action="/collector/update/<%= task._id %>" method="post">
+        <label for="status">Enter Status:</label>
+        <select name="status" id="status">
+            <option value="inProgress" <%= task.status === 'inProgress' ? 'selected' : '' %>>In Progress</option>
+            <option value="aboutToComplete" <%= task.status === 'aboutToComplete' ? 'selected' : '' %>>About To Complete</option>
+            <option value="completed" <%= task.status === 'completed' ? 'selected' : '' %>>Completed</option>
+        </select>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

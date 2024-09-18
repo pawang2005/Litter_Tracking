@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanCity Sign Up</title>
+</head>
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="signup-container">
+        <div class="signup-box">
+            <h2>Sign Up</h2>
+            <form action="/admin/create" method="post" enctype="multipart/form-data">
+                Select Profile Picture:
+                <input type="file" id="profilePicture" name="profilePicture" accept="image/png, image/jpeg">
+                <input type="text" placeholder="First name" name="firstname" id="firstname" required>
+                <input type="text" placeholder="Last name" name="lastname" id="lastname" required>
+                <input type="email" placeholder="Email" name="email" id="email" required>
+                <input type="date" placeholder="Date of Birth" name="date" id="date" required>
+                <input type="text" placeholder="Enter Collector Area here" name="Area" id="Area" required>
+                <input type="password" placeholder="New password" name="password" id="password" required>
+                
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

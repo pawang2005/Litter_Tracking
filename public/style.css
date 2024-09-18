@@ -1,0 +1,218 @@
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 2rem 0;
+}
+.collector-card {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.collector-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.assign-btn {
+    display: inline-block;
+    width: 150px;
+    height: 30px;
+    padding: 2px;
+    border-radius: 50px;
+    margin: 0;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s;
+}
+.assign-btn:hover {
+    background-color: #0056b3;
+}
+
+/* styling for assign ejs*/
+tr, th, td {
+    border: 1px solid black;
+}
+
+
+/* styling for collectorlist ejs*/
+.user-card {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+.user-info {
+    margin-bottom: 0.5rem;
+}
+.user-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.user-email, .user-role {
+    color: #666;
+}
+
+
+/* styling for complain ejs*/
+.complain-card {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    padding: 1rem;
+}
+.complain-text {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+.complain-date {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+.complain-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+
+/* styling for createcollector ejs*/
+.signup-container {
+    margin-top: 120px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.signup-box {
+    width: 400px;
+    background-color: #198754;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.signup-box img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.signup-box h2 {
+    font-size: 22px;
+    margin-top: 10px;
+    color: white;
+}
+
+.signup-box input[type="text"],
+.signup-box input[type="email"],
+.signup-box input[type="date"],
+.signup-box input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background: transparent;
+    color: white;
+    outline: none;
+}
+
+.signup-box input::placeholder {
+    color: white;
+}
+
+.signup-box button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #4f2aad; /* Purple log in button */
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.signup-box button[type="submit"]:hover {
+    background-color: #3c217f;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .signup-box {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+
+/* styling for admin drives ejs*/
+
+
+/* styling for taskassigned ejs*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+
+/* styling for userslist ejs*/
+.user-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+.user-card p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #ddd;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #198754;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+        }
+
+        .signup-box {
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .signup-box img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        .signup-box h2 {
+            font-size: 22px;
+            margin-top: 10px;
+            color: white;
+        }
+
+        .signup-box input[type="text"],
+        .signup-box input[type="email"],
+        .signup-box input[type="date"],
+        .signup-box input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            font-size: 16px;
+            border: none;
+            border-bottom: 2px solid #ccc;
+            background: transparent;
+            color: white;
+            outline: none;
+        }
+
+        .signup-box input::placeholder {
+            color: white;
+        }
+
+        .signup-box button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4f2aad; 
+            color: white;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .signup-box button:hover {
+            background-color: #3c217f;
+        }
+
+        .profile-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-icon img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <div class="signup-box">
+            <h2>Sign Up</h2>
+            <form action="/signup" method="post" enctype="multipart/form-data">
+                <p style="color: #fff">Select Profile Picture</p>
+                <input type="file" id="profilePicture" name="profilePicture" accept="image/png, image/jpeg" />
+                <br>
+                <input type="text" placeholder="First name" name="firstname" id="firstname" required>
+                <input type="text" placeholder="Last name"  name="lastname" id="lastname" required>
+                <input type="email" placeholder="Email"  name="email" id="email" required>
+                <input type="date" placeholder="Date of Birth"  name="date" id="date" required>
+                <input type="password" placeholder="New password"  name="password" id="password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
