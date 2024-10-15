@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CleanCity - Update Status</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ebf4ff;
+        }
+
         h2 {
             text-align: center;
             margin-top: 2rem;
@@ -71,21 +78,68 @@
                 padding: 0.75rem;
                 font-size: 1rem;
             }
+
+            .back-button .btn{
+                width: 30%;
+            }
+
+            label {
+                font-size: 1rem; /* Smaller label text on mobile */
+            }
+
+            h2 {
+                font-size: 1.5rem; /* Smaller heading on mobile */
+            }
         }
+
+        /* Style for the back button */
+        .back-button {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 40px;
+      }
+
+      .back-button button {
+        background-color: #3182ce;
+        color: #ffff;
+        border: none;
+        margin-bottom: 50px;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 10%;
+        transition: background-color 0.3s ease;
+      }
+
+      .back-button button:hover {
+        background-color: #5da1e0;
+      }
     </style>
 </head>
 <body>
-    <%- include('./partials/nav.ejs') %>
+    <%- include('./partials/header.ejs') %>
 
-    <h2>Update Task Status</h2>
-    <form action="/collector/update/<%= task._id %>" method="post">
-        <label for="status">Enter Status:</label>
-        <select name="status" id="status">
-            <option value="inProgress" <%= task.status === 'inProgress' ? 'selected' : '' %>>In Progress</option>
-            <option value="aboutToComplete" <%= task.status === 'aboutToComplete' ? 'selected' : '' %>>About To Complete</option>
-            <option value="completed" <%= task.status === 'completed' ? 'selected' : '' %>>Completed</option>
-        </select>
-        <button type="submit">Update</button>
-    </form>
+    <% if (locals.user) { %>
+        <h2>Update Task Status</h2>
+        <div>
+        <form action="/collector/update/<%= task._id %>" method="post">
+            <label for="status">Enter Status:</label>
+            <select name="status" id="status">
+                <option value="In Progress" <%= task.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
+                <option value="About To Complete" <%= task.status === 'About To Complete' ? 'selected' : '' %>>About To Complete</option>
+                <option value="Completed" <%= task.status === 'Completed' ? 'selected' : '' %>>Completed</option>
+            </select>
+            <button type="submit">Update</button>
+        </form>
+        </div>
+        <a href="/collector/task" class="back-button">
+            <button class="btn">Back</button>
+        </a>
+        
+        <%- include('./partials/footer.ejs') %>
+    <% } else { %>
+        <%- include('./partials/notuser.ejs') %>
+    <% } %>
 </body>
 </html>

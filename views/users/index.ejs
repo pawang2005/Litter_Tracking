@@ -1,43 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Garbage Management System</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #ebf4ff;
+      }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CleanCity</title>
-    <link rel="stylesheet" href="/user.css">
-</head>
+      .main-content {
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
 
-<body>
-    <%- include('./partials/nav.ejs') %>
-    <main>
-        <% if (!locals.user) { %>
-            <section id="home">
-                <h2>Welcome to CleanCity</h2>
-                <p>Help keep your city clean by reporting litter and participating in community cleaning drives.</p>
-            </section>
-        <% } else { %>
-            <section id="complaints">
-                <div class="card-container">
-                    <% reversedData.slice(0, 9).forEach((item)=> { %>
-                        <div class="card">
-                            <div class="card-header">
-                                <img src="<%= item.userInfo.profilePicture || '/images/default.png' %>" alt="Profile Picture">
-                                <span class="user-name">
-                                    <%= item.userInfo.firstname %> <%= item.userInfo.lastname %>
-                                </span>
-                            </div>
-                            <div class="card-image">
-                                <img src="<%= item.complaint.imageURL %>" alt="Reported litter">
-                            </div>
-                            <div class="card-content">
-                                <p><%= item.complaint.complain %></p>
-                            </div>
-                        </div>
-                    <% }) %>
-                </div>
-            </section>
-        <% } %>
-    </main>   
-</body>
+      h1 {
+        text-align: center;
+        color: black;
+        font-size: 2rem;
+      }
+
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .dashboard-item {
+        background-color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        min-height: 80px;
+      }
+
+      .dashboard-item:hover {
+        background-color: #f7fafc;
+        transform: translateY(-5px);
+      }
+
+      .dashboard-item img {
+        width: 40px;
+        height: 40px;
+        margin-right: 1rem;
+      }
+
+      .dashboard-item span {
+        color: #38a169;
+        font-size: 1rem;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      @media (max-width: 768px) {
+        .main-content {
+          padding: 1rem;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        .dashboard-grid {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .dashboard-item {
+          flex-direction: column;
+          text-align: center;
+          padding: 0.5rem;
+        }
+
+        .dashboard-item img {
+          margin-right: 0;
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .dashboard-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .dashboard-item {
+          flex-direction: row;
+          text-align: left;
+          padding: 1rem;
+        }
+
+        .dashboard-item img {
+          margin-right: 1rem;
+          margin-bottom: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('./partials/header.ejs') %>
+    <% if (locals.user) { %>
+    <main class="main-content">
+      <h1>User Home</h1>
+      <div class="dashboard-grid">
+        <a href="/profile">
+          <div class="dashboard-item">
+            <img src="/images/profile.png" alt="Profile" />
+            <span>Profile</span>
+          </div>
+        </a>
+
+        <a href="/capture">
+          <div class="dashboard-item">
+            <img src="/images/report.png" alt="Report" />
+            <span> Report </span>
+          </div>
+        </a>
+
+        <a href="/drives">
+          <div class="dashboard-item">
+            <img src="/images/drive.png" alt="Cleaning Drive" />
+            <span>Cleaning Drive</span>
+          </div>
+        </a>
+
+        <a href="/notifications">
+          <div class="dashboard-item">
+            <img src="/images/notification.png" alt="Notifications" />
+            <span>Notifications</span>
+          </div>
+        </a>
+
+        <a href="/tips">
+          <div class="dashboard-item">
+            <img src="/images/tips.png" alt="View Tips" />
+            <span>Tips</span>
+          </div>
+        </a>
+
+        <a href="/complains">
+          <div class="dashboard-item">
+            <img src="/images/complain.png" alt="Complains" />
+            <span>Complains</span>
+          </div>
+        </a>
+      </div>
+    </main>
+
+    <%- include('./partials/footer.ejs') %>
+    <% } else { %>
+    <%- include('./partials/notuser.ejs') %>
+    <% } %>
+  </body>
 </html>

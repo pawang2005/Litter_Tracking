@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Bin</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ebf4ff;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    select {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    button {
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .back-btn {
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .back-btn button {
+        background-color: #3182ce;
+        margin-bottom: 40px;
+      }
+
+      .back-btn button:hover {
+        background-color: #5da1e0;
+      }
+
+    /* Media queries for responsiveness */
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+        margin: 30px auto;
+      }
+
+      input[type="text"]
+      {
+        width: 94%;
+        font-size: 14px;
+      }
+      select{
+        width: 98%;
+        font-size: 14px;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 10px;
+        width: 98%;
+      }
+
+      .back-btn button{
+        width: 10%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 10px;
+        margin: 20px 10px;
+      }
+
+      input[type="text"]
+      {
+        font-size: 12px;
+        padding: 8px;
+        width: 94%;
+      }
+
+      select,option 
+      {
+        font-size: 12px;
+        padding: 8px;
+        width: 100%;
+      }
+      button {
+        font-size: 12px;
+        padding: 8px;
+      }
+      .back-btn button{
+        width: 20%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <%- include('./partials/header.ejs') %>
+    <% if (locals.user) { %>
+      <div class="container">
+        <h2>Update Bin Information</h2>
+        <form action="/admin/update-bin/<%= bin._id %>" method="post">
+          <label for="bin">Create Bin:</label>
+          <input type="text" name="bin" id="bin" value="<%= bin.bin %>" required>
+
+          <label for="locality">Locality:</label>
+          <input type="text" name="locality" id="locality" value="<%= bin.locality %>" required>
+
+          <label for="landmark">Landmark:</label>
+          <input type="text" name="landmark" id="landmark" value="<%= bin.landmark %>" required>
+
+          <label for="collector">Collectors:</label>
+          <select name="collector" id="collector" required>
+            <% collectors.forEach(collector => { %>
+              <% if (collector.email === bin.collector) { %>
+                <option value="<%= collector.email %>" selected>
+                  <%= collector.firstname %> <%= collector.lastname %> - <%= collector.email %>
+                </option>
+              <% } else { %>
+                <option value="<%= collector.email %>">
+                  <%= collector.firstname %> <%= collector.lastname %> - <%= collector.email %>
+                </option>
+              <% } %>
+            <% }) %>
+          </select>
+
+          <label for="cyclic">Cyclic Period:</label>
+          <select name="cyclic" id="cyclic" required>
+            <option value="Daily" <%= bin.cyclic === 'Daily' ? 'selected' : '' %>>Daily</option>
+            <option value="Weekly" <%= bin.cyclic === 'Weekly' ? 'selected' : '' %>>Weekly</option>
+            <option value="Monthly" <%= bin.cyclic === 'Monthly' ? 'selected' : '' %>>Monthly</option>
+          </select>
+
+          <label for="route">Best Route:</label>
+          <input type="text" name="route" id="route" value="<%= bin.route %>" required>
+
+          <button type="submit">Update</button>
+        </form>
+      </div>
+
+      <div class="back-btn">
+        <a href="/admin">
+          <button>Back</button>
+        </a>
+      </div>
+      <%- include('./partials/footer.ejs') %>
+        <% } else { %>
+          <%- include('./partials/notuser.ejs') %>
+            <% } %>
+
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
-const driveSchema = new mongoose.Schema({
+const User = require('./user.js')
+const driveSchema = mongoose.Schema({
     location: {
         type: String,
         required: true,
@@ -13,7 +14,7 @@ const driveSchema = new mongoose.Schema({
         required: true,
     },
     Applied: { type: Number, default: 0 },
-    appliedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    appliedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: User }]
 });
 
 const driveModel = mongoose.model('drives', driveSchema);

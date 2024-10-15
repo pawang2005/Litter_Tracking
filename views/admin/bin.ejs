@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bin</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #ebf4ff;
+      }
+
+      .container {
+        max-width: 100%;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow-x: auto;
+      }
+
+      th, td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+        font-size: 16px;
+        word-wrap: break-word; /* Ensures text wraps inside cells */
+      }
+
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      button {
+        padding: 8px 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .back-btn {
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .back-btn button {
+        background-color: #3182ce;
+      }
+
+      .back-btn button:hover {
+        background-color: #5da1e0;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .container {
+          margin: 20px;
+          padding: 15px;
+        }
+
+        table {
+          font-size: 14px;
+        }
+
+        th, td {
+          padding: 8px;
+        }
+
+        button {
+          font-size: 12px;
+          padding: 6px 10px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          margin: 10px;
+          padding: 10px;
+        }
+
+        table {
+          font-size: 12px;
+        }
+
+        th, td {
+          padding: 6px;
+        }
+
+        button {
+          font-size: 10px;
+          padding: 4px 8px;
+        }
+
+        /* Horizontal scroll for small screens */
+        .container {
+          overflow-x: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/header.ejs') %> 
+    <% if (locals.user) { %>
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <th>Bin</th>
+            <th>Locality</th>
+            <th>LandMark</th>
+            <th>Collector</th>
+            <th>Cyclic</th>
+            <th>Route</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% allBin.forEach(element => { %>
+          <tr>
+            <td><%= element.bin %></td>
+            <td><%= element.locality %></td>
+            <td><%= element.landmark %></td>
+            <td><%= element.collector %></td>
+            <td><%= element.cyclic %></td>
+            <td><%= element.route %></td>
+            <td>
+              <form action="/admin/update-bin/<%= element._id %>" method="get">
+                <button>Update</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+      <div class="back-btn">
+        <a href="/admin">
+          <button>Back</button>
+        </a>
+      </div>
+    </div>
+    <%- include('./partials/footer.ejs') %> 
+    <% } else { %>
+    <%- include('./partials/notuser.ejs') %> 
+    <% } %>
+  </body>
+</html>

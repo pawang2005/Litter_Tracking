@@ -1,5 +1,4 @@
-#Ignore Node Modules file
-node_modules
 
-#Ignore uploads
+node_modules
+.env
 public/images/uploads

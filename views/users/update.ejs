@@ -1,166 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Profile</title>
+    <style>
+      body{
+        background-color: #ebf4ff;
+      }
+      .profile-update-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 1rem;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Update Profile</title>
-  <style>
-    .profile-update-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: #f7f7f7;
-      padding: 1rem;
-    }
-
-    .profile-update {
-      background-color: #ffffff;
-      padding: 2.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
-      width: 100%;
-      font-family: 'Roboto', sans-serif;
-    }
-
-    .profile-update h2 {
-      text-align: center;
-      color: #333;
-      font-size: 1.75rem;
-      font-weight: 500;
-      margin-bottom: 1.5rem;
-      position: relative;
-    }
-
-    .profile-update form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .profile-update label {
-      font-size: 1rem;
-      color: #444;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-
-    .profile-update input[type="text"],
-    .profile-update input[type="email"],
-    .profile-update input[type="date"],
-    .profile-update input[type="file"] {
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      width: 100%;
-    }
-
-    .profile-update input:focus {
-      border-color: #66afe9;
-      outline: none;
-      box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
-    }
-
-    .profile-update input[type="file"] {
-      padding: 0.5rem;
-      border: none;
-    }
-
-    .profile-update input[type="file"]::file-selector-button {
-      padding: 0.75rem 1.25rem;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-    }
-
-    .profile-update input[type="file"]::file-selector-button:hover {
-      background-color: #43a047;
-    }
-
-    .profile-update button {
-      padding: 0.9rem;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .profile-update button:hover {
-      background-color: #0056b3;
-    }
-
-    .profile-update input,
-    .profile-update button {
-      transition: all 0.3s ease;
-    }
-
-    @media (max-width: 768px) {
       .profile-update {
-        padding: 2rem;
+        background-color: #ffffff;
+        padding: 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        font-family: "Roboto", sans-serif;
       }
 
       .profile-update h2 {
-        font-size: 1.5rem;
+        text-align: center;
+        color: #333;
+        font-size: 1.75rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        position: relative;
       }
-    }
 
-    @media (max-width: 480px) {
-      .profile-update {
-        padding: 1.5rem;
+      .profile-update form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
       }
 
-      .profile-update h2 {
-        font-size: 1.3rem;
+      .profile-update label {
+        font-size: 1rem;
+        color: #444;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      .profile-update input[type="text"],
+      .profile-update input[type="email"],
+      .profile-update input[type="date"],
+      .profile-update input[type="file"] {
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        width: 100%;
+      }
+
+      .profile-update input:focus {
+        border-color: #66afe9;
+        outline: none;
+        box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
+      }
+
+      .profile-update input[type="file"] {
+        padding: 0.5rem;
+        border: none;
+      }
+
+      .profile-update input[type="file"]::file-selector-button {
+        padding: 0.75rem 1.25rem;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .profile-update input[type="file"]::file-selector-button:hover {
+        background-color: #43a047;
+      }
+
+      .profile-update button {
+        padding: 0.9rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .profile-update button:hover {
+        background-color: #0056b3;
       }
 
       .profile-update input,
       .profile-update button {
-        font-size: 0.9rem;
+        transition: all 0.3s ease;
       }
-    }
-  </style>
-</head>
 
-<body>
-  <%- include('./partials/nav.ejs') %>
+      .back-button {
+        display: block;
+        text-align: center;
+        margin: 40px 0;
+      }
 
-  <main>
-    <div class="profile-update-container">
-      <div class="profile-update">
-        <h2>Update Your Information</h2>
-        <form action="/update" method="POST" enctype="multipart/form-data">
-          <label for="profilePicture">Profile Picture:</label>
-          <input type="file" id="profilePicture" name="profilePicture" accept="image/png, image/jpeg">
+      .back-button button {
+        background-color: #3182ce;
+        color: #ffff;
+        border: none;
+        margin-bottom: 50px;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
 
-          <label for="firstname">First Name:</label>
-          <input type="text" id="firstname" name="firstname" value="<%= users.firstname %>" required>
+      .back-button button:hover {
+        background-color: #5da1e0;
+      }        
 
-          <label for="lastname">Last Name:</label>
-          <input type="text" id="lastname" name="lastname" value="<%= users.lastname %>" required>
+      @media (max-width: 768px) {
+        .profile-update {
+          padding: 2rem;
+        }
 
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" value="<%= users.email %>" required>
+        .profile-update h2 {
+          font-size: 1.5rem;
+        }
+      }
 
-          <label for="date">Date:</label>
-          <input type="date" id="date" name="date" value="<%= users.date %>" required>
+      @media (max-width: 480px) {
+        .profile-update {
+          padding: 1.5rem;
+        }
 
-          <button type="submit">Update</button>
-        </form>
+        .profile-update h2 {
+          font-size: 1.3rem;
+        }
+
+        .profile-update input,
+        .profile-update button {
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('./partials/header.ejs') %> <% if (locals.user) { %>
+    <main>
+      <div class="profile-update-container">
+        <div class="profile-update">
+          <h2>Update Your Information</h2>
+          <form action="/update" method="POST" enctype="multipart/form-data">
+            <label for="profilePicture">Profile Picture:</label>
+            <input
+              type="file"
+              id="profilePicture"
+              name="profilePicture"
+              accept="image/png, image/jpeg"
+            />
+
+            <label for="firstname">First Name:</label>
+            <input
+              type="text"
+              id="firstname"
+              name="firstname"
+              value="<%= users.firstname %>"
+              required
+            />
+
+            <label for="lastname">Last Name:</label>
+            <input
+              type="text"
+              id="lastname"
+              name="lastname"
+              value="<%= users.lastname %>"
+              required
+            />
+
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value="<%= users.email %>"
+              required
+            />
+
+            <label for="date">Date:</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value="<%= users.date %>"
+              required
+            />
+
+            <button type="submit">Update</button>
+          </form>
+        </div>
       </div>
-    </div>
-  </main>
-</body>
+    </main>
 
+    <a href="/profile" class="back-button">
+      <button>Back</button>
+    </a>
+
+    <%- include('./partials/footer.ejs') %> <% } else { %> <%-
+    include('./partials/notuser.ejs') %> <% } %>
+  </body>
 </html>

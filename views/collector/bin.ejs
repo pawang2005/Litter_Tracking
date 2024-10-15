@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ebf4ff; /* Light background for contrast */
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            max-width: 100%; /* Use full width on small screens */
+            margin: 20px auto; /* Center table */
+            border-collapse: collapse; /* Remove double borders */
+            background-color: white; /* Table background */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px; /* More padding for a cleaner look */
+            text-align: left; /* Align text to the left */
+            font-size: 14px; /* Base font size for table */
+        }
+
+        th {
+            background-color: #3182ce; /* Header background color */
+            color: white; /* Header text color */
+            font-size: 16px; /* Slightly larger font for header */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* Zebra striping for rows */
+        }
+
+        tr:hover {
+            background-color: #e1f5fe; /* Highlight on hover */
+        }
+
+        .back-button {
+            display: block;
+            text-align: center;
+            margin: 40px auto; /* Center back button */
+            max-width: 200px; /* Limit button width */
+        }
+
+        .back-button button {
+            background-color: #3182ce;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: 100%; /* Full width for the button */
+        }
+
+        .back-button button:hover {
+            background-color: #5da1e0;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 600px) {
+            table {
+                font-size: 12px; /* Smaller text on mobile */
+            }
+
+            th, td {
+                padding: 6px; /* Less padding on mobile */
+            }
+
+            .back-button button {
+                font-size: 14px; /* Smaller button text */
+                padding: 8px; /* Reduced padding on button */
+            }
+        }
+
+        @media (max-width: 320px) {
+            th, td {
+                padding: 4px; /* Further reduce padding for very small screens */
+                font-size: 10px; /* Further decrease font size */
+            }
+
+            .back-button button {
+                font-size: 12px; /* Smaller button text for very small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/header.ejs') %> 
+    <% if (locals.user) { %> 
+      <table>
+        <thead>
+          <tr>
+            <th>Bin</th>
+            <th>Locality</th>
+            <th>Landmark</th>
+            <th>Cyclic</th>
+            <th>Route</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% allBin.forEach(bin => { %> 
+            <% if (bin.collector === user.email) { %> 
+              <tr>
+                <td><%= bin.bin %></td>
+                <td><%= bin.locality %></td>
+                <td><%= bin.landmark %></td>
+                <td><%= bin.cyclic %></td>
+                <td><%= bin.route %></td>
+              </tr>
+            <% } %>
+          <% }) %>
+        </tbody>
+      </table> 
+      <div class="back-button">
+        <a href="/collector">
+          <button>Back</button>
+        </a>
+      </div>
+      <%- include('./partials/footer.ejs') %>
+    <% } else { %>
+      <%- include('./partials/notuser.ejs') %> 
+    <% } %>
+</body>
+</html>

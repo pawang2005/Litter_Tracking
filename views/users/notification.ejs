@@ -1,65 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notifications</title>
+    <link rel="stylesheet" href="/user.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notifications</title>
-  <link rel="stylesheet" href="/user.css">
-</head>
+  <style>
+    body{
+      background-color: #ebf4ff;
+    }
+    .back-button {
+        display: block;
+        text-align: center;
+        margin: 40px 0;
+      }
 
-<body>
-  <%- include('./partials/nav.ejs') %>
+      .back-button button {
+        background-color: #3182ce;
+        color: #ffff;
+        border: none;
+        margin-bottom: 50px;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
 
-  <div class="notifications-container">
-    <h2>Your Complaints Status</h2>
-    <% if (complaints && complaints.length> 0) { %>
-      <% complaints.forEach(complaint=> { %>
-        <div class="notification-item" data-id="<%= complaint._id %>">
-          <% if (!complaint.isRead) { %>
-            <span class="unread-dot"></span>
-            <% } %>
-              <h3>Complaint ID: <%= complaint._id %>
-              </h3>
-              <p class="status">Status: <%= complaint.status %>
-              </p>
-              <p>Created At: <%= complaint.createdAt.toLocaleDateString() %>
-              </p>
-        </div>
-        <% }) %>
-          <% } else { %>
-            <p class="no-complaints">You have no complaints at the moment.</p>
-            <% } %>
-  </div>
+      .back-button button:hover {
+        background-color: #5da1e0;
+      }
+  </style>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const notificationItems = document.querySelectorAll('.notification-item');
+  <body>
+    <%- include('./partials/header.ejs') %> <% if (locals.user) { %>
+    <div class="notifications-container">
+      <h2>Your Complaints Status</h2>
+      <% if (complaints && complaints.length> 0) { %> <%
+      complaints.forEach(complaint=> { %>
+      <div class="notification-item" data-id="<%= complaint._id %>">
+        <% if (!complaint.isRead) { %>
+        <span class="unread-dot"></span>
+        <% } %>
+        <h3>Complaint ID: <%= complaint._id %></h3>
+        <p class="status">Status: <%= complaint.status %></p>
+        <p>Created At: <%= complaint.createdAt.toLocaleDateString() %></p>
+      </div>
+      <% }) %> <% } else { %>
+      <p class="no-complaints">You have no complaints at the moment.</p>
+      <% } %>
+    </div>
 
-      notificationItems.forEach(item => {
-        item.addEventListener('click', function () {
-          const complaintId = this.getAttribute('data-id');
-          const unreadDot = this.querySelector('.unread-dot');
+    <a href="/home" class="back-button">
+      <button>Back</button>
+    </a>
+    <%- include('./partials/footer.ejs') %> <% } else { %> <%-
+    include('./partials/notuser.ejs') %> <% } %>
 
-          if (unreadDot) {
-            fetch('/notifications/markAsRead', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ complaintId }),
-            })
-              .then(response => {
-                if (response.ok) {
-                  unreadDot.remove();
-                }
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const notificationItems =
+          document.querySelectorAll(".notification-item");
+
+        notificationItems.forEach((item) => {
+          item.addEventListener("click", function () {
+            const complaintId = this.getAttribute("data-id");
+            const unreadDot = this.querySelector(".unread-dot");
+
+            if (unreadDot) {
+              fetch("/notifications/markAsRead", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ complaintId }),
               })
-              .catch(error => console.error('Error:', error));
-          }
+                .then((response) => {
+                  if (response.ok) {
+                    unreadDot.remove();
+                  }
+                })
+                .catch((error) => console.error("Error:", error));
+            }
+          });
         });
       });
-    });
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>

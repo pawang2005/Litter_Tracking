@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Garbage Management System</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #ebf4ff;
+      }
+
+      .main-content {
+        padding: 1rem 2rem;
+      }
+
+      h1 {
+        text-align: center;
+        color: black;
+      }
+
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .dashboard-item {
+        background-color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      .dashboard-item:hover {
+        background-color: #f7fafc;
+        transform: translateY(-5px);
+      }
+
+
+      .dashboard-item img {
+        width: 40px;
+        height: 40px;
+        margin-right: 1rem;
+      }
+
+      .dashboard-item span {
+        color: #38a169;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('./partials/header.ejs') %> <% if (locals.user) { %>
+    <main class="main-content">
+      <!-- <h1>Admin Home</h1> -->
+      <div class="dashboard-grid">
+        <a href="/admin/create-bin">
+          <div class="dashboard-item">
+            <img src="/images/createbin.png" alt="Create Bin" />
+            <span>Create Bin</span>
+          </div>
+        </a>
+
+        <a href="/admin/bin">
+          <div class="dashboard-item">
+            <img src="/images/bin.png" alt="Bin" />
+            <span> Bin</span>
+          </div>
+        </a>
+
+        <a href="/admin/create">
+          <div class="dashboard-item">
+            <img src="/images/trash-collector.png" alt="Add Collector" />
+            <span>Add Collector</span>
+          </div>
+        </a>
+
+        <a href="/admin/drives">
+          <div class="dashboard-item">
+            <img src="/images/drive.png" alt="Create Drives" />
+            <span>Create Drives</span>
+          </div>
+        </a>
+
+        <a href="/admin/complain">
+          <div class="dashboard-item">
+            <img src="/images/complain.png" alt="View Complaints" />
+            <span>View Complaints</span>
+          </div>
+        </a>
+
+        <a href="/admin/collector">
+          <div class="dashboard-item">
+            <img src="/images/workreport.png" alt="View Work report" />
+            <span>View Work report</span>
+          </div>
+        </a>
+
+        <a href="/admin/assign-task">
+          <div class="dashboard-item">
+            <img src="/images/assigntask.png" alt="Assign a Task" />
+            <span>Assign Task</span>
+          </div>
+        </a>
+
+        <a href="/admin/user">
+          <div class="dashboard-item">
+            <img src="/images/users.png" alt="Users" />
+            <span>Users</span>
+          </div>
+        </a>
+      </div>
+    </main>
+    <%- include('./partials/footer.ejs') %> <% } else { %> <%-
+    include('./partials/notuser.ejs') %> <% } %>
+  </body>
+</html>

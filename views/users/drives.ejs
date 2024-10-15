@@ -1,43 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Cleaning Drives</title>
-    <link rel="stylesheet" href="/user.css">
-</head>
-<body>
-    <%- include('./partials/nav.ejs') %>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cleaning Drives</title>
+    <!-- <link rel="stylesheet" href="/user.css" /> -->
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #ebf4ff;
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h2 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .drives-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .drive-card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        padding: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      .drive-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .drive-card h3 {
+        color: #2c3e50;
+        margin-top: 0;
+      }
+
+      .drive-card p {
+        margin: 10px 0;
+        color: #34495e;
+      }
+
+      .applied-status, .full-status {
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 4px;
+        display: inline-block;
+      }
+
+      .applied-status {
+        background-color: #2ecc71;
+        color: white;
+      }
+
+      .full-status {
+        background-color: #e74c3c;
+        color: white;
+      }
+
+      form button {
+        background-color: #3182ce;
+        color: #ffff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      form button:hover {
+        background-color: #5da1e0;
+      }
+
+      .back-button {
+        display: block;
+        text-align: center;
+        margin: 40px 0;
+      }
+
+      .back-button button {
+        background-color: #3182ce;
+        color: #ffff;
+        border: none;
+        margin-bottom: 50px;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      .back-button button:hover {
+        background-color: #5da1e0;
+      }
+
+      @media (max-width: 768px) {
+        main {
+          padding: 10px;
+        }
+
+        .drives-container {
+          grid-template-columns: 1fr;
+        }
+
+        .drive-card {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/header.ejs') %>
+    <% if (locals.user) { %>
     <main>
-        <section id="drives-section">
-            <h2>My Cleaning Drives</h2>
-            <div class="drives-container">
-                <% if (drives && drives.length > 0) { %>
-                    <% drives.forEach(drive => { %>
-                        <div class="drive-card">
-                            <h3><%= drive.location %></h3>
-                            <p>Date: <%= new Date(drive.date).toLocaleDateString() %></p>
-                            <p>Participants Required: <%= drive.number %></p>
-                            <p>Applied Participants: <%= drive.Applied %></p>
-                            <% const hasApplied = drive.appliedUsers.includes(user._id); %>
-                            <% const isFull = drive.Applied >= drive.number; %>
-                            <% if (hasApplied) { %>
-                                <p class="applied-status">Already Applied</p>
-                            <% } else if (isFull) { %>
-                                <p class="full-status">Drive Full</p>
-                            <% } else { %>
-                                <form action="/apply" method="post">
-                                    <input type="hidden" name="driveId" value="<%= drive._id %>">
-                                    <button type="submit">Apply</button>
-                                </form>
-                            <% } %>
-                        </div>
-                    <% }) %>
+      <section id="drives-section">
+        <h2>My Cleaning Drives</h2>
+        <div class="drives-container">
+          <% if (drives && drives.length > 0) { %>
+            <% drives.forEach(drive => { %>
+              <div class="drive-card">
+                <h3><%= drive.location %></h3>
+                <p>Date: <%= new Date(drive.date).toLocaleDateString() %></p>
+                <p>Participants Required: <%= drive.number %></p>
+                <p>Applied Participants: <%= drive.Applied %></p>
+                <% const hasApplied = drive.appliedUsers.includes(user._id); %>
+                <% const isFull = drive.Applied >= drive.number; %>
+                <% if (hasApplied) { %>
+                  <p class="applied-status">Already Applied</p>
+                <% } else if (isFull) { %>
+                  <p class="full-status">Drive Full</p>
+                <% } else if(!drive.appliedUsers.includes(user.id)){ %>
+                  <form action="/apply" method="post">
+                    <input type="hidden" name="driveId" value="<%= drive._id %>" />
+                    <button type="submit">Apply</button>
+                  </form>
                 <% } else { %>
-                    <p>No cleaning drives found.</p>
+                  <p class="applied-status">Already Applied</p>
                 <% } %>
-            </div>
-        </section>
+              </div>
+            <% }) %>
+          <% } else { %>
+            <p>No cleaning drives found.</p>
+          <% } %>
+        </div>
+      </section>
     </main>
-</body>
+
+    <a href="/home" class="back-button">
+      <button>Back</button>
+    </a>
+    <%- include('./partials/footer.ejs') %>
+    <% } else { %>
+      <%- include('./partials/notuser.ejs') %>
+    <% } %>
+  </body>
 </html>

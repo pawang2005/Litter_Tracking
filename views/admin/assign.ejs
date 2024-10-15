@@ -1,47 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assign Tasks</title>
-</head>
-<body>
-    <div class="navbar">
-        <%- include('./partials/nav.ejs') %>
-    </div>
 
-    <div>
-        <h1>Complains</h1>
-        <table style="border: 1px solid black;">
-            <tr>
-                <th>Id</th>
-                <th>Complain</th>
-                <th>Location</th>
-                <th>Complain Date</th>
-                <th>Category</th>
-                <th>Weight</th>
-                <th>Assign</th>
-            </tr>
-            <% for (var i = 0; i < locals.complain.length; i++) { %>
-                <% if (locals.complain[i].status === "pending") { %>
-                    <tr>
-                        <td><%= locals.complain[i]._id %></td>
-                        <td><%= locals.complain[i].complain %></td>
-                        <td>Latitude: <%= locals.complain[i].location[0].latitude %>, Longitude: <%= locals.complain[i].location[0].longitude %></td>
-                        <td><%= locals.complain[i].createdAt %></td>
-                        <td><%= locals.complain[i].category %></td>
-                        <td><%= locals.complain[i].weight %></td>
-                        <td>
-                            <form action="/admin/assign" method="post">
-                                <input type="hidden" name="complainId" value="<%= locals.complain[i]._id %>">
-                                <input type="hidden" name="collectorId" value="<%= locals.collectorId %>">
-                                <button type="submit" id="btn">Assign</button>
-                            </form>
-                        </td>
-                    </tr>
-                <% } %>
-            <% } %>
-        </table>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assign Tasks</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ebf4ff;
+    }
+
+    /* Existing styles for desktop view remain unchanged */
+
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+table th {
+  background-color: #007bff;
+  color: white;
+}
+
+table td {
+  background-color: #f9f9f9;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Back button styling */
+.back-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.back-button button {
+  background-color: #3182ce;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button button:hover {
+  background-color: #5da1e0;
+}
+
+/* Mobile responsiveness - Horizontal scrolling for the table */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    white-space: nowrap; /* Prevents table cells from wrapping */
+  }
+
+  table th,
+  table td {
+    white-space: nowrap;
+  }
+
+  .back-button {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <%- include('./partials/header.ejs') %>
+  <% if (locals.user) { %>
+
+  <div class="container">
+    <h1>Complains</h1>
+
+    <table>
+      <tr>
+        <th>Complain</th>
+        <th>Location</th>
+        <th>Complain Date</th>
+        <th>Category</th>
+        <th>Weight</th>
+        <th>Assign</th>
+      </tr>
+      <% for (var i = 0; i < locals.complain.length; i++) { %> 
+        <% if (locals.complain[i].status === "pending") { %>
+        <tr>
+          <td data-label="Complain"><%= locals.complain[i].complain %></td>
+          <td data-label="Location">
+            <%= locals.complain[i].address %>
+          </td>
+          <td data-label="Complain Date"><%= locals.complain[i].createdAt %></td>
+          <td data-label="Category"><%= locals.complain[i].category %></td>
+          <td data-label="Weight"><%= locals.complain[i].weight %></td>
+          <td data-label="Assign">
+            <form action="/admin/assign" method="post">
+              <input type="hidden" name="complainId" value="<%= locals.complain[i]._id %>">
+              <input type="hidden" name="collectorId" value="<%= locals.collectorId %>">
+              <button type="submit">Assign</button>
+            </form>
+          </td>
+        </tr>
+        <% } %>
+      <% } %>
+    </table>
+
+    <div class="back-button">
+      <a href="/admin/assign-task">
+        <button>Back</button>
+      </a>
     </div>
+  </div>
+
+  <%- include('./partials/footer.ejs') %> 
+  <% } else { %>
+  <%- include('./partials/notuser.ejs') %> 
+  <% } %>
+
 </body>
+
 </html>

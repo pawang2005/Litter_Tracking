@@ -1,10 +1,15 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model } = require('mongoose');
 
 const complainSchema = new Schema({
     imageURL: {
-        type: String,
-        required: true,
-        default: false,
+        url: {
+            type: String,
+            required: true
+        },
+        filename: {
+            type: String,
+            required: true
+        }
     },
     complain: {
         type: String,
@@ -30,7 +35,7 @@ const complainSchema = new Schema({
     }],
     date: {
         type: Date,
-        default: Date.now(),
+        default: Date.now(), // Use function reference for default value
     },
     status: {
         type: String,
@@ -45,8 +50,8 @@ const complainSchema = new Schema({
         type: String,
         required: true,
     }
-}, { timestamps: true })
+}, { timestamps: true });
 
-const complainModel = model('complain', complainSchema);
+const complainModel = model('Complain', complainSchema);
 
-module.exports = { complainModel }
+module.exports = { complainModel };

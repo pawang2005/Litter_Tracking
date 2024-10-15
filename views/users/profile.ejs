@@ -1,66 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <script
+      src="https://kit.fontawesome.com/985c6371ec.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #ebf4ff;
+      }
+      .profile-container {
+        max-width: 800px;
+        margin: 10px auto;
+        background-color: #fff;
+        padding: 50px 20px;
+        padding-bottom: 80px; /* Add padding to account for the footer */
+      }
+      .profile-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .profile-picture img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .profile-info {
+        margin-left: 20px;
+      }
+      .edit-button {
+        margin-left: auto;
+      }
+      .details-section, .posts-section {
+        margin-bottom: 20px;
+      }
+      .post {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #fff;
+      }
+      .post img {
+        max-width: 100%;
+        height: auto;
+      }
+      .back-button {
+        display: block;
+        text-align: center;
+        /* margin: 40px 0; */
+      }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CleanCity - Profile</title>
-    <link rel="stylesheet" href="/user.css">
-</head>
-<script src="https://kit.fontawesome.com/985c6371ec.js" crossorigin="anonymous"></script>
+      .back-button button {
+        background-color: #3182ce;
+        color: #ffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
 
-<body>
-    <%- include('./partials/nav.ejs') %>
+      .back-button button:hover {
+        background-color: #5da1e0;
+      }
+      
+      /* Responsive styles */
+      @media (max-width: 600px) {
+        .profile-header {
+          flex-direction: column;
+          text-align: center;
+        }
+        .profile-info {
+          margin-left: 0;
+          margin-top: 10px;
+        }
+        .edit-button {
+          margin-left: 0;
+          margin-top: 10px;
+        }
+      }
+    </style>
+  </head>
 
+  <body>
+    <%- include('./partials/header.ejs') %>
+    <% if (locals.user) { %>
     <div class="profile-container">
-        <div class="profile-header">
-            <div class="profile-picture">
-                <img src="<%= locals.user.profilePicture %>" alt="Profile Picture">
-            </div>
-            <div class="profile-info">
-                <h1>
-                    <%= locals.user.firstname %>
-                        <%= locals.user.lastname %>
-                </h1>
-            </div>
-            <form action="/update" method="get" class="edit-button">
-                <button><i class="fa-solid fa-pen-to-square"></i></button>
-            </form>
+      <div class="profile-header">
+        <div class="profile-picture">
+          <img src="<%= locals.user.profilePicture.url %>" alt="Profile Picture" />
         </div>
+        <div class="profile-info">
+          <h1><%= locals.user.firstname %> <%= locals.user.lastname %></h1>
+        </div>
+        <form action="/update" method="get" class="edit-button">
+          <button><i class="fa-solid fa-pen-to-square"></i></button>
+        </form>
+      </div>
 
-        <div class="details-section">
-            <h2>Details</h2>
-            <p>Email: <%= locals.user.email %>
-            </p>
-            <p>Date of Birth: <%= locals.user.date %>
-            </p>
-        </div>
+      <div class="details-section">
+        <h2>Details</h2>
+        <p>Email: <%= locals.user.email %></p>
+        <p>Date of Birth: <%= locals.user.date %></p>
+      </div>
 
-        <div class="posts-section">
-            <h2>Posts</h2>
-            <% if (locals.user.reports && locals.user.reports.length> 0) { %>
-                <% locals.user.reports.forEach(report=> { %>
-                    <div class="post">
-                        <h3>Reported on <%= new Date(report.date).toLocaleString('en-US', { year: 'numeric' ,
-                                month: 'long' , day: 'numeric' , hour: '2-digit' , minute: '2-digit' }) %>
-                        </h3>
-                        <img src="<%= report.imageURL %>" alt="Litter Image">
-                        <p>
-                            <%= report.complain %>
-                        </p>
-                        <p>
-                            <%= report.category %> Waste
-                        </p>
-                        <p>
-                            <%= report.weight %>
-                        </p>
-                    </div>
-                    <% }) %>
-                        <% } else { %>
-                            <p>No reports available.</p>
-                            <% } %>
-        </div>
+      <div class="posts-section">
+        <h2>Posts</h2>
+        <% if (locals.user.reports && locals.user.reports.length > 0) { %>
+          <% locals.user.reports.forEach(report => { %>
+            <div class="post">
+              <h3>
+                Reported on <%= new Date(report.date).toLocaleString('en-US', {
+                  year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                }) %>
+              </h3>
+              <img src="<%= report.imageURL.url %>" alt="Litter Image" />
+              <p><%= report.complain %></p>
+              <p><%= report.category %> Waste</p>
+              <p><%= report.weight %></p>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <p>No reports available.</p>
+        <% } %>
+      </div>
+
+      <a href="/home" class="back-button">
+        <button>Back</button>
+      </a>
     </div>
-</body>
 
+    <%- include('./partials/footer.ejs') %>
+    <% } else { %>
+      <%- include('./partials/notuser.ejs') %>
+    <% } %>
+
+    
+  </body>
 </html>

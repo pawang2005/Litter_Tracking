@@ -9,9 +9,8 @@ const assignSchema = new Schema({
     date: {type: Date, default: Date.now(),},
     complainID: { type: String },
     imageURL:{
-        type:String,
-        required : true,
-        default: false,
+        url:String,
+        filename:String,
     },
     location: [{
         latitude: {

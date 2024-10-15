@@ -2,30 +2,192 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CleanCity Sign Up</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Collector</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ebf4ff;
+    }
+
+    .signup-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 20px auto;
+      background-color: #ebf4ff;
+    }
+
+    .signup-box {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input[type="file"] {
+      margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"] {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      width: 95%;
+    }
+
+    button {
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    a {
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+    }
+
+    a button {
+      background-color: #3182ce;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+
+    a button:hover {
+      background-color: #5da1e0;
+    }
+
+
+    .back-button {
+        display: block;
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .back-button button {
+        background-color: #3182ce;
+        color: #ffff;
+        border: none;
+        margin-bottom: 50px;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      .back-button button:hover {
+        background-color: #5da1e0;
+      }
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .signup-box {
+        padding: 20px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="date"] {
+        font-size: 14px;
+        width: 95%;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      .signup-container{
+        margin: 10px 20px;
+      }
+      .signup-box {
+        padding: 15px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="date"] {
+        font-size: 12px;
+        padding: 8px;
+        width: 90%;
+      }
+
+      button {
+        font-size: 12px;
+        padding: 8px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <%- include('./partials/nav.ejs') %>
 
+  <%- include('./partials/header.ejs') %> <% if (locals.user) { %>
     <div class="signup-container">
-        <div class="signup-box">
-            <h2>Sign Up</h2>
-            <form action="/admin/create" method="post" enctype="multipart/form-data">
-                Select Profile Picture:
-                <input type="file" id="profilePicture" name="profilePicture" accept="image/png, image/jpeg">
-                <input type="text" placeholder="First name" name="firstname" id="firstname" required>
-                <input type="text" placeholder="Last name" name="lastname" id="lastname" required>
-                <input type="email" placeholder="Email" name="email" id="email" required>
-                <input type="date" placeholder="Date of Birth" name="date" id="date" required>
-                <input type="text" placeholder="Enter Collector Area here" name="Area" id="Area" required>
-                <input type="password" placeholder="New password" name="password" id="password" required>
-                <button type="submit">Sign Up</button>
-            </form>
-        </div>
+      <div class="signup-box">
+        <h2>Sign Up</h2>
+        <form action="/admin/create" method="post" enctype="multipart/form-data">
+          <label>Select Profile Picture:</label>
+          <input type="file" id="profilePicture" name="profilePicture" accept="image/png, image/jpeg" />
+
+          <input type="text" placeholder="First name" name="firstname" id="firstname" required />
+          <input type="text" placeholder="Last name" name="lastname" id="lastname" required />
+          <input type="email" placeholder="Email" name="email" id="email" required />
+          <input type="date" placeholder="Date of Birth" name="date" id="date" required />
+          <input type="text" placeholder="Enter Collector Area here" name="Area" id="Area" required />
+          <input type="password" placeholder="New password" name="password" id="password" required />
+
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
     </div>
+
+    <a href="/admin" class="back-button">
+      <button>Back</button>
+    </a>
+
+    <%- include('./partials/footer.ejs') %>
+    <% } else { %>
+      <%- include('./partials/notuser.ejs') %>
+    <% } %>
+
 </body>
 
 </html>

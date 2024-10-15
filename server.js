@@ -32,6 +32,7 @@ app.use(checkForAuthentication("token"));
 app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, "public")));
 
+
 app.use("/", userRoute);
 app.use("/admin", restrictTo(["admin"]), adminRoute);
 app.use("/collector", restrictTo(["collector", "admin"]), collectorRoute);
@@ -59,16 +60,15 @@ app.post("/signin", async (req, res) => {
             const token = await collectorModel.matchPassword(email, password);
             if (token) {
                 res.cookie("token", token);
-                return res.redirect("/collector/task");
+                return res.redirect("/collector");
             }
         }
-        console.log("Invalid credentials for:", email);
-        return res.render("users/signin", { error: "Invalid credentials" });
+        return res.render("users/signin", { error: "Invalid email or password" });
     } catch (error) {
         console.error("Signin error:", error);
         return res
             .status(500)
-            .render("signin", { error: "An error occurred during sign in" });
+            .render("users/signin", { error: "Invalid email or password" });
     }
 });
 

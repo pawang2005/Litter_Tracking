@@ -1,130 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In - Garbage Management System</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #198754; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-size: cover;
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #ebf4ff;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .header {
+        background-color: #fff;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        margin-right: 10px;
+        height: 70px;
+        width: 70px;
+      }
+
+      .header h2 {
+        color: black;
+        font-size: 1.5em;
+        margin: 0;
+        font-weight: bold;
+      }
+
+      .content {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .signin-box {
+        width: 100%;
+        max-width: 400px;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .signin-box img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+      }
+
+      .signin-box h2 {
+        font-size: 22px;
+        margin-top: 10px;
+        color: black;
+      }
+
+      .signin-box p {
+        margin-bottom: 30px;
+        color: black;
+      }
+
+      
+
+      .signin-box input,
+      .signin-box select {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px ;
+        box-sizing: border-box;
+        font-size: 16px;
+        border: none;
+        background: transparent;
+        color: black;
+        outline: none;
+        border-bottom: 2px solid #ccc;
+      }
+
+      .signin-box input::placeholder {
+        color: black;
+      }
+
+      .signin-box button {
+        width: 100%;
+        padding: 12px;
+        background-color: #4f2aad;
+        color: white;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+        border-radius: 5px;
+      }
+
+      .signin-box button:hover {
+        background-color: #3c217f;
+      }
+
+      .signin-box select {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+      }
+
+      .profile-icon {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .profile-icon img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        padding: 10px;
+      }
+
+      .error-message {
+        color: red;
+        margin-bottom: 20px;
+      }
+
+      a {
+        color: black;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 15px;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* Responsive adjustments */
+      @media screen and (max-width: 600px) {
+        .header {
+          flex-direction: column;
+          align-items: center;
+          padding: 10px;
+        }
+        
+        .logo img {
+          height: 40px;
+          width: 40px;
+        }
+        
+        .header h2 {
+          font-size: 1.2em;
+          text-align: center;
         }
 
         .signin-box {
-            width: 400px;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .signin-box img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
+          padding: 20px;
         }
 
         .signin-box h2 {
-            font-size: 22px;
-            margin-top: 10px;
-            color: white;
+          font-size: 18px;
         }
 
-        .signin-box p {
-            margin-bottom: 30px;
-            color: white;
-        }
-
-        .signin-box input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            box-sizing: border-box;
-            font-size: 16px;
-            border: none;
-            border-bottom: 2px solid #ccc;
-            background: transparent;
-            color: white;
-            outline: none;
-        }
-
-        .signin-box input::placeholder {
-            color: white;
-        }
-
-        .signin-box button {
-            width: 100%;
-            padding: 12px;
-            background-color: #4f2aad;
-            color: white;
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
-            border-radius: 5px;
-        }
-
-        .signin-box button:hover {
-            background-color: #3c217f;
-        }
-
+        .signin-box input,
+        .signin-box button,
         .signin-box select {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            box-sizing: border-box;
-            font-size: 16px;
-            border: none;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
+          font-size: 14px;
         }
 
-        .profile-icon {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
+        .signin-box img {
+          width: 60px;
+          height: 60px;
         }
-
-        .profile-icon img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: #f0f0f0;
-            padding: 10px;
-        }
-
-        .profile-icon h3 {
-            color: white;
-            margin-top: 10px;
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
 
-    <div class="signin-box">
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img src="/images/image.png" alt="Logo" />
+        <h2>Garbage Management System</h2>
+      </div>
+    </header>
+    <div class="content">
+      <div class="signin-box">
         <div class="profile-icon">
-            <img src="/images/login.png" alt="Profile Icon">
+          <img src="/images/login.png" alt="Profile Icon" />
         </div>
-        <h3>Admin</h3>
-        <form action="/signin" method="post">
-            <input type="email" placeholder="Email" required name="email">
-            <input type="password" placeholder="Password" required name="password">
-            <select name="role" id="role">
-                <option value="admin">Admin</option>
-                <option value="user">User</option>  
-                <option value="collector">Collector</option>
-            </select>
-            <button type="submit">Log In</button>
-        </form>
-    </div>
+        <% if (locals.error) { %>
+        <div class="error-message"><%= error %></div>
+        <% } %>
 
-</body>
+        <form action="/signin" method="post">
+          <input type="email" placeholder="Email" required name="email" />
+          <input
+            type="password"
+            placeholder="Password"
+            required
+            name="password"
+          />
+          <select name="role" id="role">
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+            <option value="collector">Collector</option>
+          </select>
+          <button type="submit">Log In</button>
+        </form>
+        <a href="/signup">Signup Here</a>
+      </div>
+    </div>
+  </body>
 </html>

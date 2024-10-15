@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { createTokenForUser, validateToken } = require("../authentication.js");
+const { createTokenForUser } = require("../authentication.js");
 const { createHmac, randomBytes } = require("crypto");
 const UserSchema = new mongoose.Schema({
   firstname: {
@@ -15,8 +15,8 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   profilePicture: {
-    type: String,
-    default: "/images/default.png"
+    url:String,
+    filename:String,
   },
   salt: {
     type: String,
@@ -35,7 +35,7 @@ const UserSchema = new mongoose.Schema({
     default: "user",
   },
   reports: [{
-    imageURL: { type: String },
+    imageURL: { url:String,filename:String },
     complain: { type: String },
     address: { type: String },
     date: { type: Date },

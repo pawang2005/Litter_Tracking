@@ -1,0 +1,42 @@
+<style>
+  body {
+    margin-bottom: 60px;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .footer a {
+    text-decoration: none;
+    color: #4a5568;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 0.5rem;
+  }
+</style>
+<footer class="footer">
+  <a href="/admin">
+    <img src="/images/home.png" alt="Home" />
+    <span>Home</span>
+  </a>
+  <a href="/admin/logout">
+    <img src="/images/logout.png" alt="Logout" />
+    <span>Logout</span>
+  </a>
+</footer>

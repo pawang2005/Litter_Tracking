@@ -1,95 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collector Analytics</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collector Analytic</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ebf4ff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
         .collector-analytics {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
             margin-bottom: 40px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 20px;
+            padding: 20px;
+            height: 450px;
         }
         .charts-container {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             margin-top: 20px;
         }
         .chart-wrapper {
-            width: 48%;
-            height: 300px;  /* Set a fixed height */
+            width: 100%;
+            max-width: 450px;
+            height: 250px;
+            margin-bottom: 20px;
         }
         canvas {
             max-width: 100%;
-            height: 100% !important;  /* Ensure the canvas takes full height of wrapper */
+            height: 100% !important;
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .back-button {
+        display: block;
+        text-align: center;
+        margin-bottom: 40px;
+
+      }
+
+      .back-button button {
+        background-color: #3182ce;
+        color: #ffff;
+        border: none;
+        margin-bottom: 50px;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      .back-button button:hover {
+        background-color: #5da1e0;
+      }
+        @media (max-width: 768px) {
+            .charts-container {
+                flex-direction: column;
+            }
+            .chart-wrapper {
+              margin-top : 20px;
+                width: 100%;
+            }
+            .collector-analytics{
+              height: 800px;
+            }
+        }
+        @media (max-width: 320px) {
+            .collector-analytics{
+              height: 800px;
+            }
+            .charts-container {
+              display: flex;
+                flex-direction: column;
+            }
+            .chart-wrapper {
+              margin-top : 20px;
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <%- include('./partials/nav.ejs') %>
-    <h1>Collector Analytics</h1>
+  <%- include('./partials/header.ejs') %>
+  <% if (locals.user) { %>
+    <div class="container">
+      <div id="analytics-container"></div>
+  </div>
 
-    <% if (analytics && analytics.length > 0) { %>
-        <% analytics.slice(0, 10).forEach(function(analytic) { %>
-            <div class="collector-analytics">
-                <h2>Collector: <%= analytic.name || 'Unknown' %></h2>
-                <p>Total Tasks Completed: <%= analytic.taskCompleted || 0 %></p>
-                <p>Average Time to Complete: <%= ((analytic.avgTimeToComplete || 0) / (1000 * 60)).toFixed(2) %> minutes</p>
+  <a href="/admin/collector" class="back-button">
+    <button>Back</button>
+  </a>
+  <%- include('./partials/footer.ejs') %>
+  <% } else { %>
+    <%- include('./partials/notuser.ejs') %>
+  <% } %>
+    
 
-                <div class="charts-container">
-                    <div class="chart-wrapper">
-                        <h3>Category Breakdown</h3>
-                        <canvas id="categoryChart-<%= analytic.collectorId %>"></canvas>
+    <script>
+        const analytics = <%-JSON.stringify(analytics)%>
+
+        function renderAnalytics() {
+            const container = document.getElementById('analytics-container');
+            analytics.forEach(analytic => {
+                const analyticElement = document.createElement('div');
+                analyticElement.className = 'collector-analytics';
+                analyticElement.innerHTML = `
+                    <h2>Collector: ${analytic.name || 'Unknown'}</h2>
+                    <p>Total Tasks Completed: ${analytic.taskCompleted || 0}</p>
+                    <p>Average Time to Complete: ${((analytic.avgTimeToComplete || 0) / (1000 * 60)).toFixed(2)} minutes</p>
+                    <div class="charts-container">
+                        <div class="chart-wrapper">
+                            <h3>Category Breakdown</h3>
+                            <canvas id="categoryChart-${analytic.collectorId}"></canvas>
+                        </div>
+                        <div class="chart-wrapper">
+                            <h3>Weight Breakdown</h3>
+                            <canvas id="weightChart-${analytic.collectorId}"></canvas>
+                        </div>
                     </div>
-                    <div class="chart-wrapper">
-                        <h3>Weight Breakdown</h3>
-                        <canvas id="weightChart-<%= analytic.collectorId %>"></canvas>
-                    </div>
-                </div>
+                `;
+                container.appendChild(analyticElement);
 
-                <script>
-                    (function() {
-                        var categoryData = <%- JSON.stringify(analytic.categoryBreakdown || {}) %>;
-                        var weightData = <%- JSON.stringify(analytic.weightBreakdown || {}) %>;
+                // Create charts
+                createChart(`categoryChart-${analytic.collectorId}`, analytic.categoryBreakdown, 'Category Breakdown');
+                createChart(`weightChart-${analytic.collectorId}`, analytic.weightBreakdown, 'Weight Breakdown');
+            });
+        }
 
-                        // Category Chart
-                        new Chart(document.getElementById('categoryChart-<%= analytic.collectorId %>'), {
-                            type: 'pie',
-                            data: {
-                                labels: Object.keys(categoryData),
-                                datasets: [{
-                                    data: Object.values(categoryData),
-                                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false
-                            }
-                        });
+        function createChart(canvasId, data, title) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(data),
+                    datasets: [{
+                        data: Object.values(data),
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: title
+                        }
+                    }
+                }
+            });
+        }
 
-                        // Weight Chart
-                        new Chart(document.getElementById('weightChart-<%= analytic.collectorId %>'), {
-                            type: 'pie',
-                            data: {
-                                labels: Object.keys(weightData),
-                                datasets: [{
-                                    data: Object.values(weightData),
-                                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false
-                            }
-                        });
-                    })();
-                </script>
-            </div>
-        <% }); %>
-    <% } else { %>
-        <p>No analytics data available.</p>
-    <% } %>
+        renderAnalytics();
+    </script>
 </body>
 </html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Bin</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #ebf4ff;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 50px;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        margin-bottom: 5px;
+        color: #555;
+      }
+
+      input[type="text"],
+      select {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #218838;
+      }
+
+      .back-button {
+        display: block;
+        text-align: center;
+        margin: 40px 0;
+      }
+
+      .back-button button {
+        background-color: #3182ce;
+        color: #ffff;
+        border: none;
+        margin-bottom: 50px;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      .back-button button:hover {
+        background-color: #5da1e0;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px ) {
+        .container {
+          margin: 20px;
+          padding: 15px;
+        }
+
+        input[type="text"],
+        select,
+        button {
+          font-size: 14px;
+          padding: 8px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          margin: 20px;
+          padding: 20px;
+        }
+
+        input[type="text"],
+        select,
+        button {
+          margin-bottom: 15px;
+          font-size: 12px;
+          padding: 6px;
+        }
+
+        h1 {
+          font-size: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/header.ejs') %> 
+    <% if (locals.user) { %>
+    <div class="container">
+      <h1>Create Bin</h1>
+      <form action="/admin/create-bin" method="post">
+        <label for="bin">Create Bin: </label>
+        <input type="text" name="bin" id="bin" />
+
+        <label for="locality">Locality: </label>
+        <input type="text" name="locality" id="locality" />
+
+        <label for="landmark">LandMark: </label>
+        <input type="text" name="landmark" id="landmark" />
+
+        <label for="collector">Collectors:</label>
+        <select name="collector" id="collector">
+          <% collectors.forEach(collector => { %>
+          <option value="<%= collector.email %>">
+            <%= collector.firstname %> <%= collector.lastname %> - <%= collector.Area %>
+          </option>
+          <% }) %>
+        </select>
+
+        <label for="cyclic">Cyclic Period:</label>
+        <select name="cyclic" id="cyclic">
+          <option value="Daily">Daily</option>
+          <option value="Weekly">Weekly</option>
+          <option value="Monthly">Monthly</option>
+        </select>
+
+        <label for="route">Best Route: </label>
+        <input type="text" name="route" id="route" />
+
+        <button type="submit">Create</button>
+      </form>
+
+      
+    </div>
+
+      <a href="/admin" class="back-button">
+        <button>Back</button>
+      </a>
+    <%- include('./partials/footer.ejs') %> 
+    <% } else { %>
+    <%- include('./partials/notuser.ejs') %> 
+    <% } %>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Garbage Management System</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #ebf4ff;
+      }
+
+      .main-content {
+        padding: 2rem;
+      }
+
+      h1 {
+        text-align: center;
+        color: black;
+      }
+
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .dashboard-item {
+        background-color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      .dashboard-item:hover {
+        background-color: #f7fafc;
+        transform: translateY(-5px);
+      }
+
+      .dashboard-item img {
+        width: 40px;
+        height: 40px;
+        margin-right: 1rem;
+      }
+
+      .dashboard-item span {
+        color: #38a169;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('./partials/header.ejs') %> <% if (locals.user) { %>
+    <main class="main-content">
+      <h1>Collector Home</h1>
+      <div class="dashboard-grid">
+        <a href="/collector/profile">
+          <div class="dashboard-item">
+            <img src="/images/profile.png" alt="Profile" />
+            <span>Profile</span>
+          </div>
+        </a>
+
+        <a href="/collector/task">
+          <div class="dashboard-item">
+            <img src="/images/task.png" alt="Task" />
+            <span> Task </span>
+          </div>
+        </a>
+
+        <a href="/collector/bin">
+          <div class="dashboard-item">
+            <img src="/images/bin.png" alt="Bin" />
+            <span>Bin</span>
+          </div>
+        </a>
+      </div>
+    </main>
+    <%- include('./partials/footer.ejs') %> <% } else { %> <%-
+    include('./partials/notuser.ejs') %> <% } %>
+  </body>
+</html>

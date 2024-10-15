@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Waste Management Tips</title>
+
+    <style>
+      /* Global Styles */
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #ebf4ff;
+        color: #333;
+      }
+
+      header {
+        background-color: #629ce2;
+        color: white;
+        text-align: center;
+        padding: 1rem 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 2rem;
+      }
+
+      /* Section for Tips */
+      .tips-section {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 0 15px;
+      }
+
+      .tip {
+        background-color: white;
+        margin-bottom: 15px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .tip h2 {
+        color: #629ce2;
+        margin-top: 0;
+        font-size: 1.5rem;
+      }
+
+      .tip p {
+        margin: 0.5rem 0;
+        color: #555;
+      }
+
+      .tip:hover {
+        transform: translateY(-5px);
+      }
+
+      .back-button {
+        display: block;
+        text-align: center;
+        margin: 40px 0;
+      }
+
+      .back-button button {
+        background-color: #3182ce;
+        color: #ffff;
+        border: none;
+        margin-bottom: 50px;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      .back-button button:hover {
+        background-color: #5da1e0;
+      }
+
+      @media (max-width: 600px) {
+        .tips-section {
+          padding: 0 10px;
+        }
+
+        .tip h2 {
+          font-size: 1.2rem;
+        }
+
+        footer {
+          font-size: 0.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/header.ejs') %> <% if (locals.user) { %>
+    <header>
+      <h1>Garbage Cleaning & Waste Management Tips</h1>
+    </header>
+
+    <section class="tips-section">
+      <div class="tip">
+        <h2>1. Segregate Waste at Source</h2>
+        <p>
+          <strong>Tip:</strong> Always separate your waste into
+          <strong>biodegradable</strong>, <strong>non-biodegradable</strong>,
+          and <strong>hazardous</strong> categories.
+        </p>
+        <p>
+          <strong>Why:</strong> This makes recycling easier and prevents
+          contamination of recyclable materials.
+        </p>
+      </div>
+
+      <div class="tip">
+        <h2>2. Composting Organic Waste</h2>
+        <p>
+          <strong>Tip:</strong> Set up a <strong>compost bin</strong> for food
+          scraps, vegetable peels, and garden waste.
+        </p>
+        <p>
+          <strong>Why:</strong> Composting turns organic waste into
+          nutrient-rich fertilizer, reducing landfill pressure and benefiting
+          your garden.
+        </p>
+      </div>
+
+      <div class="tip">
+        <h2>3. Reduce Single-Use Plastic</h2>
+        <p>
+          <strong>Tip:</strong> Minimize the use of single-use plastic items
+          like straws, bags, and disposable cutlery.
+        </p>
+        <p>
+          <strong>Why:</strong> Plastic takes hundreds of years to degrade and
+          pollutes the environment. Use reusable items instead.
+        </p>
+      </div>
+
+      <div class="tip">
+        <h2>4. Proper Disposal of Hazardous Waste</h2>
+        <p>
+          <strong>Tip:</strong> Never dispose of <strong>batteries</strong>,
+          <strong>electronics</strong>, or <strong>chemicals</strong> in regular
+          garbage bins.
+        </p>
+        <p>
+          <strong>Why:</strong> These items contain harmful substances that can
+          pollute the environment. Look for local hazardous waste collection
+          programs.
+        </p>
+      </div>
+
+      <div class="tip">
+        <h2>5. Encourage Recycling</h2>
+        <p>
+          <strong>Tip:</strong> Keep separate bins for items that can be
+          recycled, such as paper, glass, and certain plastics.
+        </p>
+        <p>
+          <strong>Why:</strong> Recycling saves energy, reduces the need for new
+          raw materials, and helps prevent environmental degradation.
+        </p>
+      </div>
+
+      <!-- Add more tips here -->
+    </section>
+
+    <a href="/home" class="back-button">
+      <button>Back</button>
+    </a>
+
+    <%- include('./partials/footer.ejs') %> <% } else { %> <%-
+    include('./partials/notuser.ejs') %> <% } %>
+  </body>
+</html>

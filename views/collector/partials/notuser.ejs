@@ -1,0 +1,71 @@
+<style>
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .dashboard-item {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+
+  .dashboard-item:hover {
+    background-color: #f7fafc;
+    transform: translateY(-5px);
+  }
+
+  .dashboard-item img {
+    width: 40px;
+    height: 40px;
+    margin-right: 1rem;
+  }
+
+  .dashboard-item span {
+    color: #38a169;
+  }
+  .image img{
+    height: 350px;
+    width: 650px;
+    padding-top: 1rem;
+  }
+  .image{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 600px) {
+    .image img{
+      height: 200px;
+      width: 400px;
+    }    
+  }
+</style>
+
+<div class="image">
+  <img src="/images/waste-management.jpg" alt="Waste">
+</div>
+<div class="dashboard-grid">
+  <a href="/signin">
+    <div class="dashboard-item">
+      <img src="/images/signin.png" alt="Sign In" />
+      <span>Sign In</span>
+    </div>
+  </a>
+
+  <a href="/signup">
+    <div class="dashboard-item">
+      <img src="/images/signup-icon.png" alt="Sign Up" />
+      <span>Sign Up</span>
+    </div>
+  </a>
+</div>

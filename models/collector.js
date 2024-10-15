@@ -7,8 +7,8 @@ const collectorSchema = new Schema({
         required: true,
       },
       profilePicture:{
-        type:String,
-        default: '/images/default.png'
+        url:String,
+        filename:String,
       }
       ,
       lastname: {
