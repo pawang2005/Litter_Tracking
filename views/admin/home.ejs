@@ -14,7 +14,9 @@
       }
 
       .main-content {
-        padding: 1rem 2rem;
+        padding: 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
       }
 
       h1 {
@@ -24,8 +26,8 @@
 
       .dashboard-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
         margin-top: 2rem;
       }
 
@@ -44,23 +46,35 @@
         transform: translateY(-5px);
       }
 
-
       .dashboard-item img {
-        width: 40px;
-        height: 40px;
-        margin-right: 1rem;
+        width: 30px;
+        height: 30px;
+        margin-right: 0.5rem;
       }
 
       .dashboard-item span {
         color: #38a169;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+        .dashboard-grid {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+      }
+
+      @media (max-width: 480px) {
+        .dashboard-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
 
   <body>
-    <%- include('./partials/header.ejs') %> <% if (locals.user) { %>
+    <%- include('./partials/header.ejs') %>
+    <% if (locals.user) { %>
     <main class="main-content">
-      <!-- <h1>Admin Home</h1> -->
       <div class="dashboard-grid">
         <a href="/admin/create-bin">
           <div class="dashboard-item">
@@ -68,49 +82,42 @@
             <span>Create Bin</span>
           </div>
         </a>
-
         <a href="/admin/bin">
           <div class="dashboard-item">
             <img src="/images/bin.png" alt="Bin" />
-            <span> Bin</span>
+            <span>Bin</span>
           </div>
         </a>
-
         <a href="/admin/create">
           <div class="dashboard-item">
             <img src="/images/trash-collector.png" alt="Add Collector" />
             <span>Add Collector</span>
           </div>
         </a>
-
         <a href="/admin/drives">
           <div class="dashboard-item">
             <img src="/images/drive.png" alt="Create Drives" />
             <span>Create Drives</span>
           </div>
         </a>
-
         <a href="/admin/complain">
           <div class="dashboard-item">
             <img src="/images/complain.png" alt="View Complaints" />
             <span>View Complaints</span>
           </div>
         </a>
-
         <a href="/admin/collector">
           <div class="dashboard-item">
             <img src="/images/workreport.png" alt="View Work report" />
             <span>View Work report</span>
           </div>
         </a>
-
         <a href="/admin/assign-task">
           <div class="dashboard-item">
             <img src="/images/assigntask.png" alt="Assign a Task" />
             <span>Assign Task</span>
           </div>
         </a>
-
         <a href="/admin/user">
           <div class="dashboard-item">
             <img src="/images/users.png" alt="Users" />
@@ -119,7 +126,9 @@
         </a>
       </div>
     </main>
-    <%- include('./partials/footer.ejs') %> <% } else { %> <%-
-    include('./partials/notuser.ejs') %> <% } %>
+    <%- include('./partials/footer.ejs') %>
+    <% } else { %>
+    <%- include('./partials/notuser.ejs') %>
+    <% } %>
   </body>
 </html>
