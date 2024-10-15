@@ -15,7 +15,7 @@ const path = require("path");
 
 
 mongoose
-    .connect("mongodb://localhost:27017/cleancity")
+    .connect("mongodb+srv://pawangupta5692:ENByKYZTeDVSGg9z@cluster0.zbfjc.mongodb.net/cleancity")
     .then(() => console.log("MongoDB connected"))
     .catch((err) => console.log(err));
 
