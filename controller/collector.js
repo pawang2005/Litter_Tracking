@@ -22,7 +22,7 @@ exports.getUpdate = async (req, res) => {
         if (!task) {
             return res.status(404).send("Task not found");
         }
-        return res.render('collector/collectorStatus', { user: req.user, task: task, complain: complain });
+        return res.render('collector/collectorstatus', { user: req.user, task: task, complain: complain });
     } catch (error) {
         console.error("Error fetching task:", error);
         return res.status(500).send("Error fetching task");
