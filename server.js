@@ -15,10 +15,9 @@ const path = require("path");
 
 
 mongoose
-    .connect("mongodb+srv://pawangupta5692:ENByKYZTeDVSGg9z@cluster0.zbfjc.mongodb.net/cleancity")
-    .then(() => console.log("MongoDB connected"))
-    .catch((err) => console.log(err));
-
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log(err));
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
