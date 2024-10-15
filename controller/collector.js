@@ -41,7 +41,7 @@ exports.postUpdate = async (req, res) => {
             { new: true }
         );
         const collector = await collectorModel.findById(req.user.id);
-        if (status === "completed") {
+        if (status === "Completed") {
             const taskCompletedByCollector = collector.taskCompleted + 1;
             await collectorModel.findByIdAndUpdate(req.user.id, { taskCompleted: taskCompletedByCollector });
         }
