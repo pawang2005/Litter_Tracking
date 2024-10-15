@@ -49,7 +49,7 @@ exports.getSignup = (req, res) => {
 
 exports.postSignup = async (req, res) => {
     const { firstname, lastname, password, email, date } = req.body;
-    const { path: url, filename } = req.file;
+    
 
     try {
         const prevUser = await user.findOne({ email });
@@ -60,6 +60,7 @@ exports.postSignup = async (req, res) => {
         }
         let newUser;
         if (req.file) {
+            const { path: url, filename } = req.file;
             newUser = new user({
                 profilePicture: {url, filename},
                 firstname,
