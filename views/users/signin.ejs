@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign In - Garbage Management System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+      /* Previous styles remain the same */
       body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -60,6 +62,38 @@
         text-align: center;
       }
 
+      /* New styles for password input container */
+      .password-container {
+        position: relative;
+        margin-bottom: 15px;
+      }
+
+      .password-container input {
+        width: 100%;
+        padding: 12px;
+        box-sizing: border-box;
+        font-size: 16px;
+        border: none;
+        background: transparent;
+        color: black;
+        outline: none;
+        border-bottom: 2px solid #ccc;
+      }
+
+      .password-toggle {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #666;
+      }
+
+      .password-toggle:hover {
+        color: #4f2aad;
+      }
+
+      /* Rest of the previous styles */
       .signin-box img {
         width: 80px;
         height: 80px;
@@ -77,13 +111,11 @@
         color: black;
       }
 
-      
-
       .signin-box input,
       .signin-box select {
         width: 100%;
         padding: 12px;
-        margin-bottom: 15px ;
+        margin-bottom: 15px;
         box-sizing: border-box;
         font-size: 16px;
         border: none;
@@ -91,10 +123,6 @@
         color: black;
         outline: none;
         border-bottom: 2px solid #ccc;
-      }
-
-      .signin-box input::placeholder {
-        color: black;
       }
 
       .signin-box button {
@@ -192,7 +220,7 @@
     <header class="header">
       <div class="logo">
         <img src="/images/image.png" alt="Logo" />
-        <h2>Garbage Management System</h2>
+        <h2>LITTO</h2>
       </div>
     </header>
     <div class="content">
@@ -206,12 +234,10 @@
 
         <form action="/signin" method="post">
           <input type="email" placeholder="Email" required name="email" />
-          <input
-            type="password"
-            placeholder="Password"
-            required
-            name="password"
-          />
+          <div class="password-container">
+            <input type="password" placeholder="Password" required name="password" id="password" />
+            <i class="password-toggle fas fa-eye-slash" id="togglePassword"></i>
+          </div>
           <select name="role" id="role">
             <option value="admin">Admin</option>
             <option value="user">User</option>
@@ -222,5 +248,20 @@
         <a href="/signup">Signup Here</a>
       </div>
     </div>
+
+    <script>
+      const togglePassword = document.querySelector('#togglePassword');
+      const password = document.querySelector('#password');
+
+      togglePassword.addEventListener('click', function () {
+        // Toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        
+        // Toggle the eye slash icon
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+      });
+    </script>
   </body>
 </html>

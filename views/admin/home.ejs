@@ -17,6 +17,8 @@
         padding: 1rem;
         max-width: 1200px;
         margin: 0 auto;
+        margin-bottom: 100px;
+        margin-top: 100px;
       }
 
       h1 {
@@ -34,6 +36,8 @@
       .dashboard-item {
         background-color: white;
         padding: 1rem;
+        width: 250px;
+        height: 40px;
         border-radius: 8px;
         display: flex;
         align-items: center;
@@ -61,11 +65,23 @@
         .dashboard-grid {
           grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         }
+        .main-content{
+          margin-top: 0px;
+        }
+        .dashboard-item{
+          width: 90%;
+        }
       }
 
       @media (max-width: 480px) {
         .dashboard-grid {
           grid-template-columns: 1fr;
+        }
+        .main-content{
+          margin-top: 0px;
+        }
+        .dashboard-item{
+          width: 91%;
         }
       }
     </style>
