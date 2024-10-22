@@ -91,7 +91,7 @@
       .back-button {
         display: block;
         text-align: center;
-        margin-bottom: 40px ;
+        margin-bottom: 40px;
       }
 
       .back-button button {
@@ -114,6 +114,7 @@
   <body>
     <%- include('./partials/header.ejs') %> <% if (locals.user) { %>
     <div class="container" style="margin-top: 32px">
+      <% if (complains) { %>
       <div class="cards-wrapper">
         <% complains.forEach(element => { %>
         <div class="complain-card">
@@ -150,6 +151,9 @@
         </div>
         <% }) %>
       </div>
+      <% } else { %>
+      <p>No New Complains</p>
+      <% } %>
     </div>
 
     <a href="/admin" class="back-button">
