@@ -12,7 +12,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-        folder: 'litto',
+        folder: 'litter',
         allowedFormats: ["png", "jpg", "jpeg"],
     },
 });

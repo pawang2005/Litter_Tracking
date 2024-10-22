@@ -70,7 +70,7 @@
             const unreadDot = this.querySelector(".unread-dot");
 
             if (unreadDot) {
-              fetch("/notifications/markAsRead", {
+              fetch("/notifications", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
